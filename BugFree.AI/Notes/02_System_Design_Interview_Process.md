@@ -34,4 +34,63 @@ A typical system design interview is structured into several core phases. Here's
 - **Global distribution**: For large-scale systems, you may need to consider how to distribute your system across mulitple geographic regions. 
 
 ### Handling Edge Cases and Failures 
-- **Identifying edge cases**: Consider and design for edge cases such as high traffic spikes, unusual user behavior, or system crashes. 
+- **Identifying edge cases**: Consider and design for edge cases such as high traffic spikes, unusual user behavior, or system crashes.
+- **Failure recovery**: Discuss failover strategies, data backups, disater recovery plans, and how your system can continue functioning even when parts of it fail.
+
+--- 
+
+## How Interviews Judge Your Answer 
+Interviewers typically evaluate your performance based on several key factors: 
+
+### Clarity and Communication 
+- Are you able to clearly explain your thought process?
+- Do you ask clarifying questions and restate the problem accurately ?
+- Are you able to effctively break down the system into manageable components ? 
+
+### Logical Approach 
+- Is your design logially structured ? 
+- Are you able to make thoughtful decisions about what components to include and how they interact ? 
+- Do you consider both high-level architecture and detailed component design ? 
+
+### Scalability and Performance 
+- Have you demostrate an understanding of how to scale the system for a large number of users ? 
+- Have you considered how to improve the system's performance, both in terms of speed (latency) and capacity(throughput)? 
+
+### Trade-Off Analysis 
+- Have you effectively balanced trade-offs, such as cost vs. performance or availability vs. consistency ? 
+- Do you understand the limitations and consequences of your design choices ? 
+
+### Handling Edge Cases 
+- Have you considered edge cases, such as unexpected failures, traffic surges, or security vulnerabilities?
+- Have you demostrated resilience in your system design, ensuring the system can handle various failure scenarios ? 
+
+### Creativity and Innovation 
+- Are you able to suggest innovative solutions to complex problems?
+- Have you considered modern technologies and design patterns, such as microservices, serverless architectures, or containerization ? 
+
+---
+
+## What to Expect in a System Design Interview 
+
+During the interview, you'll face various stages. Here's what you should expect: 
+
+### Problem Presentation 
+The interviewer will present a system design problem (e.g., "Design a social media feed" or "Design a messaging system like WhatsApp").
+The problem will typically be open-ended, giving you the flexibility to define the scope. 
+
+### Clarification and Questions 
+Your first task is to ask questions to fully understanding the requirements. 
+The interviewer will expect you to probe for details regarding user base, traffic volume, security needs, performance expectations, and data flow. 
+
+## Designing the System 
+You'll then begin outlining your high-level system design, breaking it down into its key components.
+As you discuss each component, be prepared to dive deeper into certain areas if the interviewer requests more detail. 
+
+## Interactive Feedback 
+The interview is often interactive. Your interviewer may challenge your design, ask for alternatives, or introduce new constraints. 
+Be prepared to defend your choices while remaining flexible to adapt your design if needed. 
+
+## Time Management 
+System design interviews usually last 45-60 minutes, so it's important to manage your time effectively. 
+Make sure you allocate enough time for each phase, especially for the high-level design and deeper component disucssion. 
+
