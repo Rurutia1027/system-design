@@ -34,21 +34,3 @@ This agenda outlines the major stages of a 45-minute system design interview.
 ![](./System_Design_Master_Rubric_v3.png)
 
 ## [System Design Agenda & Time Allocation](./routine.md)
-
-**Note:**  
-This version of the system design agenda is based on my self-study, mainly through books and watching mock interview videos. I haven’t yet refined it through real mock interview practice. As I participate in more mock interviews on Exponent, I will revise and adapt the content to reflect practical feedback and lessons learned.
-
-This agenda is designed for beginners. Once we're familiar with the overall system design flow, we can start emphasizing different parts based on the interviewer’s preferences and the context of the conversation.
-
-**While everything in a system design interview can be flexible, it's important to start with a more standarized structure.**
-
-- 0-5 min: Problem Clarification & Scoping 
-- 5-10 min: Functional & Non-Functional Requirements 
-- 10-15 min: API Design & Data Modeling 
-- 15-20 min: Capacity Estimation 
-- 20-30 min: High-Level Design + Component Breakdown 
-- 30-35 min: Trade-offs & Reliability 
-- 35-40 min: Scalability, Bottlenecks & Maintenance 
-  _i prefer add some observability usage or solution here like adding jeager & prometheus & grafana etc._
-- 40-45 min: Wrap-up, Evolution & Future Features 
-
