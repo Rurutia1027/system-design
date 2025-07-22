@@ -9,6 +9,7 @@
 ![](rate-limit-API_UML.png)
 
 ## Database Tables / Schemas 
+![](./rate-limit-DB_Design.png)
 
 --- 
 
