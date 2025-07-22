@@ -1,3 +1,16 @@
+# Rate Limiter 
+
+## Architecture Diagrams 
+![](./rate-limit-architeture.png)
+
+## Request Flow Sequence 
+
+## API & UML Diagram 
+
+## Database Tables / Schemas 
+
+--- 
+
 # Fun. / No-Fun. Requirements 
 
 ## Functional Requirements 
@@ -14,6 +27,8 @@
 - The system should be easy to configure and maintain 
 - The system should be resilient to failures, such as server crashes or cache outages. 
 
+--- 
+
 # Traffic Estimation and Data Calculation 
 ## Traffic Estimation 
 - Assume the system needs to support 500,000 requests per second at peak load. 
@@ -26,6 +41,9 @@
 - Rate limit configuration (e.g., max requests per minute) is small and can be stored in a database; assume 1 KB per API, so for 10 APIs: 10KB. 
 - Expected cache read/write operations up to 500,000 per second( one per request).
 - The system should be designed to handle occasional bursts, so peak traffic may be 2 * the average (up to 1 million RPS for short periods).
+
+
+---
 
 # API Design 
 ## Check Rate Limit 
@@ -77,6 +95,8 @@ __rate_limiter_not_allowed__
 - The main API for runtime checks is `/rate_limit/check`, which is called by the application before processing a request. 
 - The configuration API is optional and used for setting or updating rate limits per API. 
 
+---
+
 # Database Design 
 ## Rate Limit Configuration Table 
 **Table Name**: rate_limit_config 
@@ -109,6 +129,7 @@ The high level architecture consists of the following components:
 - **In-Memory Cache (such as Redis)**: stores the current state of each user's rate limit bucket for fast, atomic access, and updates.
 - **Database**: stores rate limit configurations (e.g., max requests per minute per API) for persistence and management.
 
+---
 
 # Detailed Components Design 
 ## Rate Limit Service (RLS)
@@ -148,3 +169,40 @@ The high level architecture consists of the following components:
 ```
 We use Redis as a centralized in-memory cache to store token buckets. Since updates need to be atomic to prevent lost tokens during concurrent access, Redis provides several native features to handle this. 
 ```
+
+---
+
+# Trade-Off Discussion 
+## Token Bucket vs. Leaky Bucket Algorithm 
+
+## Per-User-Per-API vs. Global Limits:
+
+## In-Memory Cache (Redis) vs. Local Memory 
+
+## Atomic Operations in Cache 
+
+## Storing Buckets in Cache vs. Database
+
+## Configuration Storage 
+
+## TTL for Bucket Keys 
+
+---
+
+# Failure Scenario Discussion 
+## Cache Service Outage: 
+## Hot Key Problem:
+- If the in-memory cache (e.g., Redis) becomes unavailable, the RLS cannot access or update token buckets, leading to all requests being either allowed (if failing open) or denied (if failing closed). This impacts rate limiting enforcement and could result in abuse or serivce disruption.
+- Data in cache is volatile; if the cache restarts, all token bucket states are lost. Users may temporarily bypass rate limit until the buckets are rebuilt. 
+
+## RLS Instance Failure:
+- Since RLS instances are stateless, failure of one instance does not affect the overall system as long as others are available. However, if all RLS instances fail or are unreachable, no rate limiting checks can be performed. 
+
+## Database Unavailability:
+- If the configuration database is down, new or updated rate limit configurations cannot be loaded. Existing rate limits in memory or cache continue to function, but configuration changes are not possible until recovery. 
+
+## Network Partitions 
+- Network issues between RLS and cache or database can cause partial outages, leading to inconsistent rate limiting or inability to enforce limits for some users or APIs. 
+
+## Clock Skew
+- If RLS instance have unsynchronized clocks, token refill calculations may be inconsistent, resulting in incorrect rate limiting behavior. 
