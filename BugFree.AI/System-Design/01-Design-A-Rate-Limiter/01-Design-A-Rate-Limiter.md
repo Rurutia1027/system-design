@@ -6,6 +6,7 @@
 ## Request Flow Sequence 
 
 ## API & UML Diagram 
+![](rate-limit-API_UML.png)
 
 ## Database Tables / Schemas 
 
